@@ -28,9 +28,22 @@ NODE init_node(int key, void *data){
     node->height = NULL; // TODO: Check it later if it is NULL. Can it be 0 instead of NULL? In this way, we don't need to write getHeight function.
     return node;
 }
+
+int max(int num1, int num2)
+{
+    return (num1 > num2 ) ? num1 : num2;
+}
+int get_height(NODE node){
+    if(node == NULL || node->height == NULL){
+        return 0;
+    }else{
+        return node->height;
+    }
+}
 NODE avl_insert_rec(NODE node, int key, void *data){
     if(node == NULL){
         node = init_node(key, data);
+
     }
     else{
         if(key < node->key){
@@ -46,9 +59,22 @@ NODE avl_insert_rec(NODE node, int key, void *data){
 
     //TODO: Update the height of current node;
     //TODO: node->height = max(node->left->height,node->right->height) + 1;
+    node->height = max(get_height(node->left), get_height(node->right)+1);
 
     //TODO: Compute Balance Factor
     //TODO: bf = node->left->height - node->right->height
+
+    int bf = get_height(node->left) - get_height(node->right); //Balance Factor
+    if(bf < -1 || bf > 1){
+        if(bf < 0 ){
+            //  Right Problem
+            //TODO: do Left Rotation
+        }else{
+
+        }
+        //TODO:Rotate
+    }
+
     //TODO: CAUTION!!! node->left or node->right might be NULL;
     return node;
 }
@@ -88,7 +114,9 @@ int main() {
     avl_insert(t1, 40, NULL);
     avl_insert(t1, 60, NULL);
     avl_insert(t1, 32, NULL);
-    avl_insert(t1, 45, NULL);
+    avl_insert(t1, 65, NULL);
+    avl_insert(t1, 43, NULL);
+    avl_insert(t1, 78, NULL);
 
 
     tree_print(t1->root,0);
