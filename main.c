@@ -25,10 +25,68 @@ NODE init_node(int key, void *data){
     node->right = NULL;
     node->key = key;
     node->data = data;
-    node->height = NULL; // TODO: Check it later if it is NULL. Can it be 0 instead of NULL? In this way, we don't need to write getHeight function.
+    node->height = NULL;
     return node;
 }
 
+/*void dsw_right_rot(AVL t){
+    NODE grandParent = (NODE)t;
+    NODE parent = t->root;
+
+    while(parent != NULL){
+        NODE child = parent->left;
+        if(child != NULL){
+            parent->left = child->right;
+            child->right = parent;
+            grandParent->right = child;
+            parent = child;
+        }
+        else{
+            grandParent = parent;
+            parent = parent->right;
+
+        };
+
+    }
+
+}
+
+int amount_of_backbone(AVL backbone_t){
+    int count = 0;
+    if(backbone_t != NULL && backbone_t->root != NULL){
+        NODE child = backbone_t->root;
+        while(child != NULL){
+            child = child->right;
+            count++;
+        }
+    }
+    return count;
+}
+
+void left_rotation(AVL backbone_t,int n){
+    NODE grandParent = (NODE)backbone_t;
+    NODE parent = backbone_t->root;
+    int copy_of_n = n;
+    while(n != 0){
+        NODE child = parent->right;
+        if(child != NULL && n == copy_of_n){
+            parent->right = child->left;
+            child->left = parent;
+            grandParent->right = child;
+            parent = child;
+            parent = parent;
+            n--;
+        }
+        else{
+            grandParent = parent;
+            parent = parent->right;
+            copy_of_n--;
+        };
+    }
+}*/
+
+void left_rotation(NODE parent){}
+void right_rotation(NODE parent){}
 int max(int num1, int num2)
 {
     return (num1 > num2 ) ? num1 : num2;
@@ -65,14 +123,20 @@ NODE avl_insert_rec(NODE node, int key, void *data){
     //TODO: bf = node->left->height - node->right->height
 
     int bf = get_height(node->left) - get_height(node->right); //Balance Factor
-    if(bf < -1 || bf > 1){
-        if(bf < 0 ){
-            //  Right Problem
-            //TODO: do Left Rotation
-        }else{
 
+
+    if(bf < -1){
+        if(get_height(node->right->left) < get_height(node->right->right)) {
+            //TODO:Right Right Problem
+        }else{
+            //TODO:Right Left Problem
         }
-        //TODO:Rotate
+    } else if(bf > 1){
+        if(get_height(node->left->right) < get_height(node->left->left)) {
+            //TODO:Left Left Problem
+        }else{
+            //TODO:Left Right Problem
+        }
     }
 
     //TODO: CAUTION!!! node->left or node->right might be NULL;
