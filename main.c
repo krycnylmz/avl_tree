@@ -197,21 +197,33 @@ NODE avl_delete_rec(NODE node, int key) {
             node->right = avl_delete_rec(node->right, key);
         } else {
             printf("You found the key\n\n\n", key);
-            // Check the node if it is leaf or not.if it is delete it
 
-/*            if (node->left == NULL && node->right == NULL) {
+            // Check the node if it is leaf or not.if it is delete it
+            if (node->left == NULL && node->right == NULL) {
                 free(node);
-                return NULL;
-            }*/
+                node = NULL;
+            }
 
             // If Parent
             // has one child
             // has two children
+/*            if (node->left != NULL || node->right != NULL) {
+                //has left child
+                if (node->left != NULL && node->right == NULL) {
+                    //find max in left subtree
 
-            return node;
+                }
+                //has right child
+                if (node->left == NULL && node->right != NULL) {
+                    //find min in right subtree
+                }
+                //has Two children
+            }*/
+
 
         }
     }
+    return node;
 }
 
 
@@ -297,6 +309,7 @@ int main() {
     tree_print(t1->root, 0);
     avl_search(t1, 90);
 
+    avl_delete(t1, 90);
 
     tree_print(t1->root, 0);
 
