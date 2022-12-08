@@ -209,14 +209,17 @@ NODE avl_delete_rec(NODE node, int key) {
             else if (node->left != NULL || node->right != NULL) {
                 //has left child
                 if (node->left != NULL && node->right == NULL) {
-                    //find max in left subtree
+
 
                 }
-                //has right child
-                if (node->left == NULL && node->right != NULL) {
-                    //find min in right subtree
+                    //has right child
+                else if (node->left == NULL && node->right != NULL) {
+                   
                 }
-                //has Two children
+                    //has Two children
+                else {
+
+                }
             }
 
 
